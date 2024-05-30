@@ -1,8 +1,10 @@
 import express from 'express'
 const app = express()
+import retornaFato from './servico/servico.js'
 
 app.get('/', (req,res) => {
-    res.json({mensagem: 'API de fatos históricos'})
+    let ano = retornaFato(2020)
+    res.json({mensagem: ano + 1})
 })
 
 app.listen(8080, () => {
