@@ -2,7 +2,7 @@ import express from 'express'
 const app = express()
 import {retornaFato,validaAno} from './servico/servico.js'
 
-app.get('/', (req,res) => {
+app.get('/fatos', (req,res) => {
     let ano = req.query.Ano    
     let fatoHist = retornaFato(ano)
     if (validaAno(ano)) {
@@ -10,7 +10,7 @@ app.get('/', (req,res) => {
     }
     else
     {
-        res.json({erro: "Parâmetro Ano inválido"})
+        res.status(400).json({erro: "Parâmetro Ano inválido"})
     }
 
 })
