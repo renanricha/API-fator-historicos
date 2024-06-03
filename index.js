@@ -1,10 +1,18 @@
 import express from 'express'
 const app = express()
-import retornaFato from './servico/servico.js'
+import {retornaFato,validaAno} from './servico/servico.js'
 
 app.get('/', (req,res) => {
-    let ano = retornaFato(2020)
-    res.json({mensagem: ano + 1})
+    let ano = req.query.Ano    
+    let fatoHist = retornaFato(ano)
+    if (validaAno(ano)) {
+        res.json({fato: fatoHist[0].Fato})
+    }
+    else
+    {
+        res.json({erro: "Parâmetro Ano inválido"})
+    }
+
 })
 
 app.listen(8080, () => {
